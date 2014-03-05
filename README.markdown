@@ -61,5 +61,5 @@ Centos / Archlinux compabilities are in progress..
 
 ##Development
 
-See [CONTRIBUTING.md](https://github.com/Sliim/puppet-pyenv/CONTRIBUTING.md) file.
+See [CONTRIBUTING.md](https://github.com/Sliim/puppet-pyenv/blob/master/CONTRIBUTING.md) file.
 
