@@ -5,9 +5,8 @@ describe 'pyenv class' do
   context 'default parameters' do
     it 'install should work with no errors' do
       pp = <<-EOS
-      class { 'pyenv::install':
-        user => 'vagrant'
-      }
+      include pyenv
+      pyenv::install { 'vagrant': }
       EOS
 
       expect(apply_manifest(pp).exit_code).to_not eq(1)
@@ -16,7 +15,8 @@ describe 'pyenv class' do
 
     it 'compile should work with no errors' do
       pp = <<-EOS
-      class { 'pyenv::compile':
+      include pyenv
+      pyenv::compile { 'compile 2.7.5 vagrant':
         user => 'vagrant',
         python => '2.7.5',
         global => true,

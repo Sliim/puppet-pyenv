@@ -1,6 +1,6 @@
 # The following part compiles and installs the chosen python version.
 #
-class pyenv::compile(
+define pyenv::compile(
   $user,
   $python,
   $group   = $user,
@@ -17,10 +17,6 @@ class pyenv::compile(
   $versions    = "${root_path}/versions"
   $global_path = "${root_path}/version"
   $path        = [ $shims, $bin, '/bin', '/usr/bin' ]
-
-  if ! defined( Class['pyenv::dependencies'] ) {
-    require pyenv::dependencies
-  }
 
   exec { "pyenv::compile ${user} ${python}":
     command     => "pyenv install ${python}",

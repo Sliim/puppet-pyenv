@@ -25,11 +25,14 @@ Compilation are done with `pyenv install` command.
 
 ### Pyenv installation
 
+Package dependencies installation:
+```
+include pyenv
+```
+
 You can install pyenv for a specific user with the following code:
 ```
-class { 'pyenv::install':
-  user => 'foobar'
-}
+pyenv::install { 'foobar': }
 ```
 
 This install pyenv for `foobar` user and setup his profile to load it at login.
@@ -38,7 +41,7 @@ This install pyenv for `foobar` user and setup his profile to load it at login.
 
 You can download and compile a python version with the folowing code:
 ```
-class { 'pyenv::compile':
+pyenv::compile { 'compile 2.7.5 foobar':
   user   => 'foobar',
   python => '2.7.5',
   global => true,

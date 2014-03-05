@@ -1,7 +1,7 @@
 # == Class pyenv::install
 #
-class pyenv::install(
-  $user,
+define pyenv::install(
+  $user  = $title,
   $group = $user,
   $home  = '',
   $root  = '',
@@ -13,10 +13,6 @@ class pyenv::install(
 
   $pyenvrc = "${home_path}/.pyenvrc"
   $shrc    = "${home_path}/${rc}"
-
-  if ! defined( Class['pyenv::dependencies'] ) {
-    require pyenv::dependencies
-  }
 
   exec { "pyenv::checkout ${user}":
     command => "git clone https://github.com/yyuu/pyenv.git ${root_path}",
