@@ -1,4 +1,4 @@
-name         'puppet-pyenv'
+name         'sliim-pyenv'
 version      '0.1.0'
 source       'git://github.com/Sliim/puppet-pyenv.git'
 author       'puppet'
