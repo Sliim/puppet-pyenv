@@ -1,0 +1,10 @@
+name         'puppet-pyenv'
+version      '0.1.0'
+source       'git://github.com/Sliim/puppet-pyenv.git'
+author       'puppet'
+license      'Apache License, Version 2.0'
+summary      'Pyenv - Python Version Manager module'
+description  'Puppet module to install and configure pyenv, a Puppet Version Manager'
+project_page 'https://github.com/Sliim/puppet-pyenv'
+
+dependency 'puppetlabs/stdlib'

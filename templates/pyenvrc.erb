@@ -1,0 +1,9 @@
+#
+# This is a shell fragment that initializes pyenv, if it
+# has not been inited yet.
+#
+if ! echo $PATH | grep -q pyenv; then
+  export PYENV_ROOT="<%= @root_path %>"
+  export PATH="$PYENV_ROOT/bin:$PATH"
+  eval "$(pyenv init -)"
+fi
