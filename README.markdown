@@ -50,6 +50,21 @@ pyenv::compile { 'compile 2.7.5 foobar':
 
 This download and compile Python `2.7.5` for `foobar` user. This version will be set as the global python version for this user.
 
+### Pip command
+
+With this puppet module you will be able to use the pip command to install, uninstall or update package.
+```
+pip {'yoda tool':
+    ensure          => 'installed',            # Can be present, installed, absent, purged, latest
+    user            => 'my_user',              # Required
+    package         => 'yoda',                 # Optional, take name if not specified
+    package_version => '==0.1.2',              # Optional, only works when ensure is present or installed
+    pyenv_root      => '/home/my_user/.pyenv', # Optional
+    python_version  => '3.3.2',                # Optional
+}
+
+```
+
 ##Reference
 
 This module use pyenv repository available on github here: https://github.com/yyuu/pyenv.
