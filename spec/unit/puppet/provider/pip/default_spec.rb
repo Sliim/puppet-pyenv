@@ -11,7 +11,11 @@ def stub_execution(result_expected, args_expected = {})
     if command_line != result_expected
       fail "Unexpected command #{command_line} executed, needed #{result_expected}"
     else
-      Puppet::Util::Execution::ProcessOutput.new('', 1)
+      begin
+        Puppet::Util::Execution::ProcessOutput.new('', 1)
+      rescue
+        ''
+      end
     end
   end
 end
