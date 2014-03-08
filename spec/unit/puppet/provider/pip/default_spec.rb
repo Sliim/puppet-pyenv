@@ -64,6 +64,13 @@ describe Puppet::Type.type(:pip).provider(:default) do
         stub_execution(command_expected)
         provider.install().should eq('')
       end
+
+      it 'should execute pip install multiple packages from array' do
+        resource[:package] = [ 'yoda', 'nosetests', 'mock' ]
+        command_expected = "/bin/su - got -c pip install yoda nosetests mock"
+        stub_execution(command_expected)
+        provider.install().should eq('')
+      end
     end
   end
 

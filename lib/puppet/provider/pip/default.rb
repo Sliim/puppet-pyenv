@@ -7,7 +7,12 @@ Puppet::Type.type(:pip).provide :default do
 
   def install
     command = ['install']
-    command << @resource[:package] + @resource[:package_version].to_s
+
+    if @resource[:package].kind_of?(Array)
+      command << @resource[:package].join(' ')
+    else
+      command << @resource[:package] + @resource[:package_version].to_s
+    end
 
     execute(command)
   end
