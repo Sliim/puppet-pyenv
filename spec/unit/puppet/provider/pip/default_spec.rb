@@ -7,7 +7,10 @@ end
 
 def stub_execution(result_expected, args_expected = {})
   Puppet::Util::ExecutionStub.set do |command, args|
+    # /bin/su path depends of the system, we don't assert it.
+    command[0] = '/bin/su'
     command_line = command.join(' ')
+
     if command_line != result_expected
       fail "Unexpected command #{command_line} executed, needed #{result_expected}"
     else
