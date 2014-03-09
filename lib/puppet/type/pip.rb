@@ -46,7 +46,7 @@ Puppet::Type.newtype(:pip) do
   end
 
   newparam(:package) do
-    desc 'Package name'
+    desc 'Package name, can be an Array for multiple package installation'
 
     defaultto do
       @resource[:name]
@@ -54,7 +54,7 @@ Puppet::Type.newtype(:pip) do
   end
 
   newparam(:package_version) do
-    desc 'Force the package to specific version'
+    desc 'Force the package to specific version, for multiple package this param can be an Array'
   end
 
   newparam(:python_version) do

@@ -39,7 +39,7 @@ This install pyenv for `foobar` user and setup his profile to load it at login.
 
 ### Python compilation
 
-You can download and compile a python version with the folowing code:
+You can download and compile a python version with the following code:
 ```
 pyenv::compile { 'compile 2.7.5 foobar':
   user   => 'foobar',
@@ -57,12 +57,22 @@ With this puppet module you will be able to use the pip command to install, unin
 pip {'yoda tool':
     ensure          => 'installed',            # Can be present, installed, absent, purged, latest
     user            => 'my_user',              # Required
-    package         => 'yoda',                 # Optional, take name if not specified
+    package         => 'yoda',                 # Optional, can be an Array, take name if not specified
     package_version => '==0.1.2',              # Optional, only works when ensure is present or installed
     pyenv_root      => '/home/my_user/.pyenv', # Optional
     python_version  => '3.3.2',                # Optional
 }
+```
 
+You can install multiple package in one command:
+```
+pip {'yoda tool':
+    ensure          => 'installed',  
+    user            => 'my_user',  
+    package         => [ 'nosetests', 'mock' ],  
+    package_version => [ '==1.3.0', '==1.0.1' ], 
+    python_version  => '3.3.2', 
+}
 ```
 
 ##Reference

@@ -71,6 +71,30 @@ describe Puppet::Type.type(:pip).provider(:default) do
         stub_execution(command_expected)
         provider.install().should eq('')
       end
+
+      it 'should execute pip install multiple packages with package version' do
+        resource[:package] = [ 'yoda', 'nosetests', 'mock' ]
+        resource[:package_version] = [ '==1.0.0', '==2.1.0', '==3.2.1' ]
+        command_expected = "/bin/su - got -c pip install yoda==1.0.0 nosetests==2.1.0 mock==3.2.1"
+        stub_execution(command_expected)
+        provider.install().should eq('')
+      end
+
+      it 'should execute pip install multiple packages with some versions specified' do
+        resource[:package] = [ 'yoda', 'nosetests', 'mock' ]
+        resource[:package_version] = [ '==1.0.0' ]
+        command_expected = "/bin/su - got -c pip install yoda==1.0.0 nosetests mock"
+        stub_execution(command_expected)
+        provider.install().should eq('')
+      end
+
+      it 'should execute pip install multiple packages with too many package version specified' do
+        resource[:package] = [ 'yoda', 'nosetests', 'mock' ]
+        resource[:package_version] = [ '==1.0.0', '==2.1.0', '==3.2.1', '==3.2.2' ]
+        command_expected = "/bin/su - got -c pip install yoda==1.0.0 nosetests==2.1.0 mock==3.2.1"
+        stub_execution(command_expected)
+        provider.install().should eq('')
+      end
     end
   end
 
