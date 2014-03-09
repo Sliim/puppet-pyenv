@@ -66,7 +66,7 @@ pip {'yoda tool':
 
 You can install multiple package in one command:
 ```
-pip {'yoda tool':
+pip {'tests tools':
     ensure          => 'installed',  
     user            => 'my_user',  
     package         => [ 'nosetests', 'mock' ],  
