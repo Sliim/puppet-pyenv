@@ -4,24 +4,24 @@
 
 1. [Overview](#overview)
 2. [Module Description - What the module does and why it is useful](#module-description)
-4. [Usage - Configuration options and additional functionality](#usage)
+3. [Usage - Configuration options and additional functionality](#usage)
     * [Pyenv installation](#pyenv-installation)
     * [Python compilation](#python-compilation)
-5. [Reference - An under-the-hood peek at what the module is doing and how](#reference)
+4. [Reference - An under-the-hood peek at what the module is doing and how](#reference)
 5. [OS compatibility](#os-compatibility)
 6. [Development - Guide for contributing to the module](#development)
 
-##Overview
+## Overview
 
 This module provides a way to install pyenv, a python version manager, from https://github.com/yyuu/pyenv repository and manage it.
 Only pyenv installation and version compilation are available at this time.
 
-##Module Description
+## Module Description
 
 This module uses git to clone repository and setup user's profile to initialize pyenv.
 Compilation are done with `pyenv install` command.
 
-##Usage
+## Usage
 
 ### Pyenv installation
 
