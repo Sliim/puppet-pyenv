@@ -1,0 +1,12 @@
+HOSTS:
+  centos-65-x64:
+    roles:
+      - master
+    platform: el-6-x86_64
+    box: spantree/Centos-6.5_x86-64
+    box_url: https://vagrantcloud.com/spantree/boxes/Centos-6.5_x86-64/versions/1.0.0/providers/virtualbox.box
+    hypervisor: vagrant
+
+CONFIG:
+  log_level: verbose
+  type: foss

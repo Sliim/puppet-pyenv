@@ -19,16 +19,16 @@ define pyenv::compile(
   $path        = [ $shims, $bin, '/bin', '/usr/bin' ]
 
   exec { "pyenv::compile ${user} ${python}":
-    command     => "pyenv install ${python}",
-    timeout     => 0,
-    user        => $user,
-    group       => $group,
-    cwd         => $home_path,
-    creates     => "${versions}/${python}",
-    path        => $path,
-    logoutput   => 'on_failure',
-    before      => Exec["pyenv::rehash ${user} ${python}"],
-    provider    => 'bash'
+    command   => "pyenv install ${python}",
+    timeout   => 0,
+    user      => $user,
+    group     => $group,
+    cwd       => $home_path,
+    creates   => "${versions}/${python}",
+    path      => $path,
+    logoutput => 'on_failure',
+    before    => Exec["pyenv::rehash ${user} ${python}"],
+    provider  => 'bash'
   }
 
   exec { "pyenv::rehash ${user} ${python}":
