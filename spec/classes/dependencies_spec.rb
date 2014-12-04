@@ -7,4 +7,9 @@ describe 'pyenv::dependencies' do
     let(:facts) { {:osfamily => 'debian'} }
     it { should contain_class('pyenv::dependencies::debian') }
   end
+
+  context 'Redhat' do
+    let(:facts) { {:osfamily => 'redhat'} }
+    it { should contain_class('pyenv::dependencies::redhat') }
+  end
 end
