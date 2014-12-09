@@ -91,8 +91,6 @@ OS compatibility
 -	Debian / ubuntu
 -	Redhat / centos
 
-Archlinux compatibility is in progress..
-
 ##Development
 
 See [CONTRIBUTING.md](https://github.com/Sliim/puppet-pyenv/blob/master/CONTRIBUTING.md) file.
