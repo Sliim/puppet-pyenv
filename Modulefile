@@ -1,5 +1,5 @@
 name         'Sliim-pyenv'
-version      '0.1.0'
+version      '0.1.1'
 source       'git://github.com/Sliim/puppet-pyenv.git'
 author       'puppet'
 license      'Apache License, Version 2.0'
