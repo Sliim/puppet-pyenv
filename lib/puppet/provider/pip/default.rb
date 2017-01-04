@@ -67,7 +67,7 @@ Puppet::Type.type(:pip).provide :default do
         item << {
           :package => match[1],
           :ensure  => match[2],
-        }
+        } if match
       end
     end.compact
   end

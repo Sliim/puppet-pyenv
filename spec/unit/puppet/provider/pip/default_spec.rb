@@ -5,7 +5,7 @@ def merge_recursively(a, b)
   a.merge(b) {|key, a_item, b_item| merge_recursively(a_item, b_item) }
 end
 
-def stub_execution(result_expected, args_expected = {})
+def stub_execution(result_expected, return_output = "")
   Puppet::Util::ExecutionStub.set do |command, args|
     # /bin/su path depends of the system, we don't assert it.
     command[0] = '/bin/su'
@@ -15,7 +15,7 @@ def stub_execution(result_expected, args_expected = {})
       fail "Unexpected command #{command_line} executed, needed #{result_expected}"
     else
       begin
-        Puppet::Util::Execution::ProcessOutput.new('', 1)
+        Puppet::Util::Execution::ProcessOutput.new(return_output, 1)
       rescue
         ''
       end
@@ -171,6 +171,30 @@ describe Puppet::Type.type(:pip).provider(:default) do
         command_expected = "/bin/su - got -c PYENV_VERSION=2.7.5 pip install --upgrade yoda"
         stub_execution(command_expected)
         provider.update().should eq('')
+      end
+    end
+  end
+
+  describe 'querying' do
+    context 'when querying package' do
+      it 'should be absent when pip freeze returns nothing' do
+        command_expected = "/bin/su - got -c pip freeze"
+        stub_execution(command_expected)
+        provider.query().should eq({:ensure => :absent})
+      end
+
+      it 'should be absent when pip freeze returns non-match' do
+        command_expected = "/bin/su - got -c pip freeze"
+        return_output = 'some text\nthat does\nnot match'
+        stub_execution(command_expected, return_output)
+        provider.query().should eq({:ensure => :absent})
+      end
+
+      it 'should be present when pip freeze returns match' do
+        command_expected = "/bin/su - got -c pip freeze"
+        return_output = 'yoda==1.0.0'
+        stub_execution(command_expected, return_output)
+        provider.query().should eq({:package => 'yoda', :ensure => '1.0.0'})
       end
     end
   end
