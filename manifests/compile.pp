@@ -27,7 +27,7 @@ define pyenv::compile(
     creates   => "${versions}/${python}",
     path      => $path,
     logoutput => 'on_failure',
-    before    => Exec["pyenv::rehash ${user} ${python}"],
+    notify    => Exec["pyenv::rehash ${user} ${python}"],
     provider  => 'bash'
   }
 
