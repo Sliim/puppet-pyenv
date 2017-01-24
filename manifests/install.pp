@@ -33,12 +33,18 @@ define pyenv::install(
     require => Exec["pyenv::checkout ${user}"],
   }
 
-  exec { "pyenv::shrc ${user}":
-    command => "echo 'source ${pyenvrc}' >> ${shrc}",
-    user    => $user,
+  file { $shrc:
+    ensure => present,
+    owner   => $user,
     group   => $group,
-    unless  => "grep -q pyenvrc ${shrc}",
-    path    => ['/bin', '/usr/bin', '/usr/sbin'],
-    require => File["pyenv::pyenvrc ${user}"],
+  }
+
+  file_line { "pyenv::shrc ${user}":
+    path    => $shrc,
+    line    => "source ${pyenvrc}",
+    require => [
+      File["pyenv::pyenvrc ${user}"],
+      File[$shrc],
+    ],
   }
 }
