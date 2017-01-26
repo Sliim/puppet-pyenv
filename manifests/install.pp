@@ -33,11 +33,13 @@ define pyenv::install(
     require => Exec["pyenv::checkout ${user}"],
   }
 
-  file { $shrc:
+  @file { $shrc:
     ensure => present,
     owner  => $user,
     group  => $group,
   }
+
+  realize File[$shrc]
 
   file_line { "pyenv::shrc ${user}":
     path    => $shrc,
