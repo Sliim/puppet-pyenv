@@ -35,8 +35,8 @@ define pyenv::install(
 
   file { $shrc:
     ensure => present,
-    owner   => $user,
-    group   => $group,
+    owner  => $user,
+    group  => $group,
   }
 
   file_line { "pyenv::shrc ${user}":
