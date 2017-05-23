@@ -59,7 +59,7 @@ Puppet::Type.type(:pip).provide :default do
   end
 
   def list(options = {})
-    command = ['freeze']
+    command = ['freeze --all']
     packages = execute(command)
     Array.new.tap do |item|
       packages.split("\n").each do |package|
