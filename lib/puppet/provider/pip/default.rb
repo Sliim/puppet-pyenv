@@ -61,7 +61,7 @@ Puppet::Type.type(:pip).provide :default do
       if e.message == "Requirement already satisfied"
         return
       else
-        puts e
+        raise e
       end
     end
   end
