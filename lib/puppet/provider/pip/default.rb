@@ -69,11 +69,11 @@ Puppet::Type.type(:pip).provide :default do
   end
 
   def list(options = {})
-    command = ['freeze --all']
+    command = ['list']
     packages = execute(command)
     Array.new.tap do |item|
       packages.split("\n").each do |package|
-        match = /^(.*)==(.*)$/.match(package)
+        match = /^(.*) \((.*)\)$/.match(package)
         item << {
           :package => match[1],
           :ensure  => match[2],
