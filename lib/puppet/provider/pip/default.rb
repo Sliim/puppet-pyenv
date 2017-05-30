@@ -55,8 +55,10 @@ Puppet::Type.type(:pip).provide :default do
       command.unshift("PYENV_VERSION=#{resource[:python_version]}")
     end
 
+    cmd = command.join(' ')
+
     begin
-      su('-', @resource[:user], '-c', command.join(' '))
+      su('-', @resource[:user], '-c', cmd)
     rescue Puppet::ExecutionFailure => e
       if e.message == "Requirement already satisfied"
         return
