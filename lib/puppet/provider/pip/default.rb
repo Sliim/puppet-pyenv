@@ -55,7 +55,13 @@ Puppet::Type.type(:pip).provide :default do
       command.unshift("PYENV_VERSION=#{resource[:python_version]}")
     end
 
-    return su('-', @resource[:user], '-c', command.join(' '))
+    begin
+      %X{su('-', @resource[:user], '-c', command.join(' '))}
+    rescue Exception => e
+      if e == "Requirement already satisfied"
+        return 0
+      end
+    end
   end
 
   def list(options = {})
