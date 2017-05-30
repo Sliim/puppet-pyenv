@@ -60,7 +60,7 @@ Puppet::Type.type(:pip).provide :default do
     begin
       su('-', @resource[:user], '-c', cmd)
     rescue Puppet::ExecutionFailure => e
-      if e.message == "Requirement already satisfied"
+      if e.message =~ "Requirement already satisfied"
         return
       else
         raise e
