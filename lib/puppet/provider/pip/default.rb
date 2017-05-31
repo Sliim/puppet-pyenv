@@ -10,12 +10,12 @@ Puppet::Type.type(:pip).provide :default do
 
     if @resource[:package].kind_of?(Array)
       if @resource[:package_version] and @resource[:package_version].kind_of?(Array)
-        @resource[:package].zip(@resource[:package_version]) { |p, v| command << p.to_s + v.to_s }
+        @resource[:package].zip(@resource[:package_version]) { |p, v| command += [p.to_s, v.to_s] }
       else
-        command << @resource[:package]
+        command += [@resource[:package]]
       end
     else
-      command << @resource[:package] + @resource[:package_version].to_s
+      command += [@resource[:package], @resource[:package_version].to_s]
     end
 
     execute(command)
@@ -55,15 +55,25 @@ Puppet::Type.type(:pip).provide :default do
       command.unshift("PYENV_VERSION=#{resource[:python_version]}")
     end
 
-    return su('-', @resource[:user], '-c', command.join(' '))
+    cmd = command.join(' ')
+
+    begin
+      su('-', @resource[:user], '-c', cmd)
+    rescue Puppet::ExecutionFailure => e
+      if e.message =~ "Requirement already satisfied"
+        return
+      else
+        raise e
+      end
+    end
   end
 
   def list(options = {})
-    command = ['freeze']
+    command = ['list']
     packages = execute(command)
     Array.new.tap do |item|
       packages.split("\n").each do |package|
-        match = /^(.*)==(.*)$/.match(package)
+        match = /^(.*) \((.*)\)$/.match(package)
         item << {
           :package => match[1],
           :ensure  => match[2],
