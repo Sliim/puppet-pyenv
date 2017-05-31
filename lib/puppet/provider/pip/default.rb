@@ -10,12 +10,12 @@ Puppet::Type.type(:pip).provide :default do
 
     if @resource[:package].kind_of?(Array)
       if @resource[:package_version] and @resource[:package_version].kind_of?(Array)
-        @resource[:package].zip(@resource[:package_version]) { |p, v| command += [p.to_s, v.to_s] }
+        @resource[:package].zip(@resource[:package_version]) { |p, v| command << p.to_s, v.to_s }
       else
-        command += [@resource[:package]]
+        command << @resource[:package]
       end
     else
-      command += [@resource[:package], @resource[:package_version].to_s]
+      command << @resource[:package], @resource[:package_version].to_s
     end
 
     execute(command)
