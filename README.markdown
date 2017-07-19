@@ -1,4 +1,4 @@
-####Table of Contents
+#### Table of Contents
 
 [![Build Status](https://travis-ci.org/Sliim/puppet-pyenv.png?branch=master)](https://travis-ci.org/Sliim/puppet-pyenv)
 
@@ -81,7 +81,7 @@ pip {'tests tools':
 }
 ```
 
-##Reference
+## Reference
 
 This module use pyenv repository available on github here: https://github.com/yyuu/pyenv.
 
@@ -91,6 +91,6 @@ OS compatibility
 -	Debian / ubuntu
 -	Redhat / centos
 
-##Development
+## Development
 
 See [CONTRIBUTING.md](https://github.com/Sliim/puppet-pyenv/blob/master/CONTRIBUTING.md) file.
