@@ -6,4 +6,5 @@ if ! echo $PATH | grep -q pyenv; then
   export PYENV_ROOT="<%= @root_path %>"
   export PATH="$PYENV_ROOT/bin:$PATH"
   eval "$(pyenv init -)"
+  eval "$(pyenv init --path)"
 fi
