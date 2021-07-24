@@ -1,7 +1,5 @@
 #### Table of Contents
 
-[![Build Status](https://travis-ci.org/Sliim/puppet-pyenv.png?branch=master)](https://travis-ci.org/Sliim/puppet-pyenv)
-
 1.	[Overview](#overview)
 2.	[Module Description - What the module does and why it is useful](#module-description)
 3.	[Usage - Configuration options and additional functionality](#usage)
